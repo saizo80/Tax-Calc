@@ -21,10 +21,11 @@ fn get_input() -> String {
 
 fn find_tax_target(target: f64, rate: f64) -> f64 {
     let mut input = target;
-    while (((input+(input*rate))*100.0).round())/100.0 != target && input > 0.00 {
+    while (((input+(input*rate))*100.0).round())/100.0 != target {
         input -= 0.01;
-        if input == 0.00 {
-            break;
+        if input < 0.00 {
+            println!("Target could not be calculated");
+            std::process::exit(1);
         }
     }
     return input;
